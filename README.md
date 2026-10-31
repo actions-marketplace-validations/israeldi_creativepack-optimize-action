@@ -2,7 +2,7 @@
 
 Optimize PNG/JPEG assets in a built HTML5 advertising ZIP, save a verified ZIP and JSON report, and fail the build if the complete ZIP remains over your byte budget.
 
-Source is published in this repository. GitHub Marketplace publication is being prepared. The workflow below pins the independently reviewed implementation to an immutable source commit.
+[Available in GitHub Marketplace](https://github.com/marketplace/actions/creativepack-html5-zip-optimizer). The workflow below pins the independently reviewed implementation to an immutable source commit.
 
 ## Connect a build
 
