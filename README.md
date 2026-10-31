@@ -2,7 +2,7 @@
 
 Optimize PNG/JPEG assets in a built HTML5 advertising ZIP, save a verified ZIP and JSON report, and fail the build if the complete ZIP remains over your byte budget.
 
-**Release candidate:** this directory is prepared for a standalone GitHub Action repository. It has not been published to GitHub Marketplace. Replace the repository and commit placeholders below with the actual reviewed release before publishing this README.
+Source is published in this repository. GitHub Marketplace publication is being prepared. The workflow below pins the independently reviewed implementation to an immutable source commit.
 
 ## Connect a build
 
@@ -13,7 +13,7 @@ Optimize PNG/JPEG assets in a built HTML5 advertising ZIP, save a verified ZIP a
 ```yaml
 - name: Optimize the built creative ZIP
   id: creativepack
-  uses: OWNER/CREATIVEPACK_ACTION_REPOSITORY@FULL_COMMIT_SHA
+  uses: israeldi/creativepack-optimize-action@9dddbae7e6a4406af28fdfa29a998d49790f4183
   with:
     rapidapi-key: ${{ secrets.CREATIVEPACK_RAPIDAPI_KEY }}
     input: dist/banner.zip
