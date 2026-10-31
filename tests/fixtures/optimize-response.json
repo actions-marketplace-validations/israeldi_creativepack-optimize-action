@@ -1,0 +1,75 @@
+{
+  "archive_base64": "UEsDBBQAAAAIAAAAX116P1/DdQAAAJEAAAAKAAAAaW5kZXguaHRtbCXMOw7CMAwA0KuY7NCVIc3CAeAKlmsSi/wUm5benkrdn56/LI1s7wzJSg6+sCFQwqFss/va+3p3wZtY5vAYjCYrv5A+0LbKC/APS8/sp1N4KRF00OxQj0An3dAo3XqNDjAf43NIlIoZdK+W2ISAWm4DTunCH1BLAwQUAAAACAAAAF9d2jo8lnAAAAByAAAAEQAAAGFzc2V0cy9zd2F0Y2gucG5n6wzwc+flkuJiYGDg9fRwCQLSAiDMwQYk5T//TwRSlp4ujiEVt96eVxQ6YMDDYlh67MGK+DnPnqc+5TQTjtzAf2/a1UWp83eViDmaPderlRde+j55swH35g+/mcVz47fc3nfuENAQBk9XP5d1TglNAFBLAQIUAxQAAAAIAAAAX116P1/DdQAAAJEAAAAKAAAAAAAAAAAAAACkgQAAAABpbmRleC5odG1sUEsBAhQDFAAAAAgAAABfXdo6PJZwAAAAcgAAABEAAAAAAAAAAAAAAKSBnQAAAGFzc2V0cy9zd2F0Y2gucG5nUEsFBgAAAAACAAIAdwAAADwBAAAAAA==",
+  "report": {
+    "schema_version": "1.0",
+    "status": "within_budget",
+    "requested_mode": "lossless",
+    "budget_bytes": 4096,
+    "input_bytes": 1481,
+    "output_bytes": 457,
+    "saved_bytes": 1024,
+    "savings_percent": 69.142,
+    "input_sha256": "90ac2287e93e621bc0e62405703b1ddc8640170f38c8e824a8d0a3f7ea0cc211",
+    "output_sha256": "e0a8bc33e56131b903d5c37a5f23912ebc674f093af9de4534562d7186759ebf",
+    "selection": "lossless",
+    "input_expanded_bytes": 1253,
+    "output_expanded_bytes": 259,
+    "invariants": {
+      "same_entry_paths": true,
+      "non_image_bytes_unchanged": true,
+      "image_dimensions_unchanged": true,
+      "archive_not_larger": true
+    },
+    "files": [
+      {
+        "path": "index.html",
+        "is_directory": false,
+        "kind": "non_image",
+        "input_bytes": 145,
+        "output_bytes": 145,
+        "saved_bytes": 0,
+        "input_sha256": "45738285be7816862eb791d876ddff68fd7e930160a578382c58242bd69473e1",
+        "output_sha256": "45738285be7816862eb791d876ddff68fd7e930160a578382c58242bd69473e1",
+        "method": "copy_bytes",
+        "warnings": [],
+        "image": null
+      },
+      {
+        "path": "assets/swatch.png",
+        "is_directory": false,
+        "kind": "image",
+        "input_bytes": 1108,
+        "output_bytes": 114,
+        "saved_bytes": 994,
+        "input_sha256": "d3854a84f6d7e3be8d75261388381b14fb0c191acd5372e7b2c1e7205d1b3291",
+        "output_sha256": "779983b399edab8c6b5e0b8c3e0c0446f8479865e3b726a3cbfcdc8abd86c03f",
+        "method": "png_idat_filter_optimize",
+        "warnings": [],
+        "image": {
+          "kind": "image",
+          "format": "PNG",
+          "dimensions": [
+            16,
+            16
+          ],
+          "frames": 1,
+          "method": "png_idat_filter_optimize",
+          "status": "optimized",
+          "warnings": [],
+          "pixel_equal": true,
+          "alpha_equal": true,
+          "input_bytes": 1108,
+          "output_bytes": 114
+        }
+      }
+    ],
+    "warnings": [],
+    "limitations": [
+      "The budget measures the complete ZIP file, not runtime network transfer, initial load, or ad-network approval.",
+      "Code, fonts, vectors and unsupported image formats are preserved; their size may make a budget unattainable.",
+      "No scripts are executed and no external assets are fetched. Functional behavior and visual acceptance are not established.",
+      "Image dimensions and formats are retained. Balanced mode may change colors; lossless mode retains decoded pixel values.",
+      "Repacked candidates discard opaque ZIP extras, comments and ownership metadata; original selection retains validated original bytes."
+    ]
+  }
+}

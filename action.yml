@@ -1,0 +1,65 @@
+name: CreativePack HTML5 ZIP Optimizer
+description: Optimize PNG/JPEG assets in an HTML5 ZIP through CreativePack and enforce a complete ZIP byte budget.
+author: IsraelDiego
+branding:
+  icon: package
+  color: purple
+inputs:
+  rapidapi-key:
+    description: Your subscribed CreativePack RapidAPI application key. Supply a GitHub Actions secret.
+    required: true
+  input:
+    description: Existing ZIP path relative to the checked-out workspace (maximum 8 MiB).
+    required: true
+  output:
+    description: New optimized ZIP path relative to the workspace. Parent directory must already exist.
+    default: creativepack-optimized.zip
+  report:
+    description: New JSON report path relative to the workspace. Parent directory must already exist.
+    default: creativepack-report.json
+  budget-bytes:
+    description: Desired complete ZIP size in bytes, from 1024 to 8388608.
+    required: true
+  mode:
+    description: lossless or balanced. Balanced may change image colors and needs visual review.
+    default: lossless
+  fail-on-budget:
+    description: Fail the step after saving the verified result when the ZIP remains over budget.
+    default: 'true'
+outputs:
+  archive:
+    description: Optimized ZIP workspace-relative path, available after a verified response.
+    value: ${{ steps.optimize.outputs.archive }}
+  report:
+    description: JSON report workspace-relative path, available after a verified response.
+    value: ${{ steps.optimize.outputs.report }}
+  status:
+    description: within_budget or over_budget.
+    value: ${{ steps.optimize.outputs.status }}
+  input-bytes:
+    description: Original complete ZIP bytes.
+    value: ${{ steps.optimize.outputs.input-bytes }}
+  output-bytes:
+    description: Resulting complete ZIP bytes.
+    value: ${{ steps.optimize.outputs.output-bytes }}
+  saved-bytes:
+    description: Complete ZIP bytes saved.
+    value: ${{ steps.optimize.outputs.saved-bytes }}
+  output-sha256:
+    description: SHA-256 digest of the verified ZIP.
+    value: ${{ steps.optimize.outputs.output-sha256 }}
+runs:
+  using: composite
+  steps:
+    - id: optimize
+      shell: bash
+      env:
+        CREATIVEPACK_ACTION_DIR: ${{ github.action_path }}
+        CREATIVEPACK_RAPIDAPI_KEY: ${{ inputs.rapidapi-key }}
+        CREATIVEPACK_INPUT: ${{ inputs.input }}
+        CREATIVEPACK_OUTPUT: ${{ inputs.output }}
+        CREATIVEPACK_REPORT: ${{ inputs.report }}
+        CREATIVEPACK_BUDGET_BYTES: ${{ inputs.budget-bytes }}
+        CREATIVEPACK_MODE: ${{ inputs.mode }}
+        CREATIVEPACK_FAIL_ON_BUDGET: ${{ inputs.fail-on-budget }}
+      run: python3 "$CREATIVEPACK_ACTION_DIR/run.py"

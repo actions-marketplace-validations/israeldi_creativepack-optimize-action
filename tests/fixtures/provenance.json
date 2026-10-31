@@ -1,0 +1,9 @@
+{
+  "source": "https://creativepack.flamingoapis.synology.me:8443/openapi.json",
+  "retrieved_at_utc": "2026-10-31T21:11:25.262277+00:00",
+  "openapi_sha256": "7b297a7074aabbfb901ede9bb196551a40ab74cfc59c5acda04451b3bd75fcd6",
+  "scope": "Owned fictional sample and example response from the public CreativePack OpenAPI; no authenticated processing call",
+  "request_budget_bytes": 4096,
+  "request_mode": "lossless",
+  "sample_sha256": "90ac2287e93e621bc0e62405703b1ddc8640170f38c8e824a8d0a3f7ea0cc211"
+}
