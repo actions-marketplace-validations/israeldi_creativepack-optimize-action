@@ -4,9 +4,30 @@ Optimize PNG/JPEG assets in a built HTML5 advertising ZIP, save a verified ZIP a
 
 [Available in GitHub Marketplace](https://github.com/marketplace/actions/creativepack-html5-zip-optimizer). The workflow below pins the independently reviewed implementation to an immutable source commit.
 
+## Check your ZIP locally first
+
+Use Python 3.10+ to check a built archive before opening an account. The check reads the ZIP locally and uses the same supported-archive rules as the Action. It sends zero requests and leaves your files intact.
+
+```sh
+git clone https://github.com/israeldi/creativepack-optimize-action.git
+cd creativepack-optimize-action
+python3 preflight.py ../dist/banner.zip --budget-bytes 153600
+```
+
+Replace the ZIP path and byte limit with your delivery requirements. The budget applies to the complete archive. The command reports how many bytes you need to remove and how much of the current ZIP represents PNG or JPEG data.
+
+| Result | Next step |
+| --- | --- |
+| `already_within_budget` | Your current archive meets the target. |
+| `no_png_or_jpeg_candidates` | Review the other assets for reductions. |
+| `review_nonimage_bytes_and_zip_overhead` | Review the current nonimage payload and ZIP overhead before trying the service. |
+| `candidate_for_optimization` | Try one ZIP using the free Basic plan and read the result report. Compare the plans for repeated builds. [CreativePack pricing](https://rapidapi.com/IsraelDiego/api/creativepack/pricing) |
+
+The byte breakdown describes the input ZIP. Repacking can change compressed sizes and ZIP overhead. PNG and JPEG signatures identify candidates for inspection. The hosted optimizer determines the savings on each actual creative.
+
 ## Connect a build
 
-1. Subscribe to [CreativePack on RapidAPI](https://rapidapi.com/IsraelDiego/api/creativepack). A free Basic plan is available; review the current request allowance and paid plans there.
+1. Choose the plan that fits your build volume. A free Basic plan is available for your first run. [CreativePack on RapidAPI](https://rapidapi.com/IsraelDiego/api/creativepack/pricing)
 2. Save your subscribed application's key as the repository secret `CREATIVEPACK_RAPIDAPI_KEY`.
 3. Insert this step after your checkout and ZIP build steps. Use an Ubuntu runner with Python 3.10+ and Bash; no Python packages need installing.
 
