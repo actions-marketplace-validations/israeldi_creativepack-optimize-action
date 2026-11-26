@@ -60,7 +60,7 @@ def workspace_path(root, value, *, existing=False):
 
 def read_archive(path):
     try:
-        fd = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
+        fd = os.open(path, os.O_RDONLY | getattr(os, "O_NONBLOCK", 0) | getattr(os, "O_NOFOLLOW", 0))
         with os.fdopen(fd, "rb") as source:
             info = os.fstat(source.fileno())
             if not stat.S_ISREG(info.st_mode) or not 0 < info.st_size <= MAX_ARCHIVE:
@@ -150,6 +150,10 @@ def request_result(original, key, budget, mode, connection_factory=None):
         conn.close()
 
 
+def is_candidate_image(content):
+    return content.startswith((b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff"))
+
+
 def verify_result(value, original, before, budget, mode):
     if not isinstance(value, dict) or set(value) != {"archive_base64", "report"}:
         raise ActionError("The service returned an unsupported result contract.")
@@ -183,7 +187,7 @@ def verify_result(value, original, before, budget, mode):
                          "output_sha256": hashlib.sha256(new).hexdigest()}
         if not isinstance(entry, dict) or any(type(entry.get(k)) is not type(v) or entry[k] != v for k, v in expected_file.items()):
             raise ActionError("The result file manifest does not match the verified ZIP.")
-        image = old.startswith(b"\x89PNG\r\n\x1a\n") or old.startswith(b"\xff\xd8\xff")
+        image = is_candidate_image(old)
         if new_directory != directory or ((directory or not image) and old != new):
             raise ActionError("A nonimage ZIP member changed.")
     return output, report
